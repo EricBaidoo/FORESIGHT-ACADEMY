@@ -1,0 +1,31 @@
+:root{
+  --scarlet:#FF2400;
+  --crimson:#DC143C;
+}
+body{font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#222}
+.hero{height:60vh;background:linear-gradient(135deg,var(--crimson),var(--scarlet));}
+.carousel .hero{height:70vh;display:flex;align-items:center;background-size:cover;background-position:center}
+.carousel-item .hero{background-repeat:no-repeat}
+.carousel-fade .carousel-item{transition:opacity .8s ease-in-out}
+.carousel-caption{position:relative;bottom:auto;transform:none;background:rgba(0,0,0,0.35);padding:1rem;border-radius:8px;display:inline-block}
+/* Improve readability of hero text against gradient backgrounds */
+.hero h1, .hero h2, .hero .lead{ text-shadow: 0 6px 18px rgba(0,0,0,0.55); }
+@media(min-width:1200px){.carousel .hero{height:75vh}}
+
+/* Header & footer styling */
+.navbar{background:#000}
+.navbar .navbar-brand, .navbar .nav-link{color:#fff}
+.navbar .nav-link:hover{color:rgba(255,255,255,0.85)}
+.site-footer{background:#000;color:#fff}
+.site-footer a{color:inherit}
+
+/* Footer newsletter styling */
+.site-footer .input-group .form-control{background:transparent;border-color:rgba(255,255,255,0.15);color:#fff}
+.site-footer .input-group .form-control::placeholder{color:rgba(255,255,255,0.7)}
+.site-footer .btn-outline-light{border-color:rgba(255,255,255,0.2)}
+.hero .lead{opacity:0.95}
+.btn-scarlet{background:var(--scarlet);color:#fff;border:none}
+.btn-crimson{background:var(--crimson);color:#fff;border:none}
+.card{border-radius:10px}
+section{scroll-margin-top:80px}
+@media(max-width:767px){.hero{height:40vh}}
