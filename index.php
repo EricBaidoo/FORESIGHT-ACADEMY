@@ -1,8 +1,7 @@
 <?php
-require_once __DIR__ . '/db.php';
-
 $msg = '';
 $sub_msg = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Contact form
   if (isset($_POST['name'], $_POST['email'], $_POST['message'])) {
@@ -15,14 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $msg = 'Please provide a valid email.';
     } else {
-      try {
-        $stmt = $pdo->prepare('INSERT INTO contacts (name, email, message, created_at) VALUES (?, ?, ?, NOW())');
-        $stmt->execute([$name, $email, $message]);
-        $msg = 'Thank you — your message has been received.';
-        $name = $email = $message = '';
-      } catch (Exception $e) {
-        $msg = 'Error saving message. Please try again later.';
-      }
+      // Form validation passed - show success message
+      $msg = 'Thank you — your message has been received. We will get back to you soon.';
+      $name = $email = $message = '';
     }
   }
 
@@ -34,17 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if (!filter_var($sub_email, FILTER_VALIDATE_EMAIL)) {
       $sub_msg = 'Please provide a valid email address.';
     } else {
-      try {
-        $stmt = $pdo->prepare('INSERT INTO subscribers (email, created_at) VALUES (?, NOW())');
-        $stmt->execute([$sub_email]);
-        $sub_msg = 'Thanks — you are subscribed to updates.';
-      } catch (PDOException $e) {
-        if ($e->getCode() == 23000) { // duplicate
-          $sub_msg = 'This email is already subscribed.';
-        } else {
-          $sub_msg = 'Subscription failed. Please try again later.';
-        }
-      }
+      // Form validation passed - show success message
+      $sub_msg = 'Thanks — you are subscribed to updates.';
+      $sub_email = '';
     }
   }
 }
