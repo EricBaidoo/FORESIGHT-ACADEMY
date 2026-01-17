@@ -22,6 +22,74 @@ $subs = $pdo->query('SELECT id, email, created_at FROM subscribers ORDER BY crea
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin - Foresight Academy</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Mobile-responsive admin styles */
+    @media (max-width: 768px) {
+      .table {
+        font-size: 0.875rem;
+      }
+      
+      .table thead {
+        display: none;
+      }
+      
+      .table tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        background: #fff;
+      }
+      
+      .table td {
+        display: block;
+        text-align: left;
+        padding: 0.5rem 0;
+        border: none;
+      }
+      
+      .table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 0.5rem;
+        color: #495057;
+      }
+      
+      h1 {
+        font-size: 1.75rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+      }
+      
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      
+      .text-warning {
+        font-size: 0.875rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .table {
+        font-size: 0.8125rem;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      h2 {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
 </head>
 <body class="p-4">
   <div class="container">
@@ -34,11 +102,11 @@ $subs = $pdo->query('SELECT id, email, created_at FROM subscribers ORDER BY crea
       <tbody>
         <?php foreach($contacts as $c): ?>
           <tr>
-            <td><?php echo $c['id'] ?></td>
-            <td><?php echo htmlspecialchars($c['name']) ?></td>
-            <td><?php echo htmlspecialchars($c['email']) ?></td>
-            <td><?php echo nl2br(htmlspecialchars($c['message'])) ?></td>
-            <td><?php echo $c['created_at'] ?></td>
+            <td data-label="ID"><?php echo $c['id'] ?></td>
+            <td data-label="Name"><?php echo htmlspecialchars($c['name']) ?></td>
+            <td data-label="Email"><?php echo htmlspecialchars($c['email']) ?></td>
+            <td data-label="Message"><?php echo nl2br(htmlspecialchars($c['message'])) ?></td>
+            <td data-label="When"><?php echo $c['created_at'] ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>
@@ -50,9 +118,9 @@ $subs = $pdo->query('SELECT id, email, created_at FROM subscribers ORDER BY crea
       <tbody>
         <?php foreach($subs as $s): ?>
           <tr>
-            <td><?php echo $s['id'] ?></td>
-            <td><?php echo htmlspecialchars($s['email']) ?></td>
-            <td><?php echo $s['created_at'] ?></td>
+            <td data-label="ID"><?php echo $s['id'] ?></td>
+            <td data-label="Email"><?php echo htmlspecialchars($s['email']) ?></td>
+            <td data-label="When"><?php echo $s['created_at'] ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>
